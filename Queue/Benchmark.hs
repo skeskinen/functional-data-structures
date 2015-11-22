@@ -14,7 +14,8 @@ moreSnoc :: [QueueInstruction] -> Bool
 moreSnoc xs = isJust $ foldl (\m a -> case a of
   Snoc _ -> succ <$> m
   Tail -> (((>0) <$> m) >>= guard) *> (pred <$> m)
-  _ -> m) (Just 0) xs
+  Head -> (((>0) <$> m) >>= guard) *> m
+  ) (Just 0) xs
 
 
 queueBenchmarks :: IO [Benchmark]

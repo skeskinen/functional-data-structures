@@ -8,6 +8,8 @@ import qualified Graph.Graph as G
 import Graph.PSQ
 import qualified Data.Vector as V
 import Control.Arrow (second)
+import qualified Graph.OkasakiRBT as RBT
+import qualified Data.Set as S
 
 inf :: G.Weight
 inf = maxBound
@@ -26,10 +28,15 @@ psqDijkstra g = V.replicate s inf V.// loop (decrease (0,0) psq)
 graphBenchmarks :: IO [Benchmark]
 graphBenchmarks = do
   randomGraph <- generate arbitrary
+  randomList <- generate arbitrary :: IO [Int]
   return [ bgroup "graph"
       [
         bgroup "psq" [
           bench "dijkstra" $ nf psqDijkstra randomGraph
         ]
+      ],
+      bgroup "set" [
+        bench "okasaki RBT" $ nf (foldr RBT.insert RBT.empty) randomList,
+        bench "containers set" $ nf (foldr S.insert S.empty) randomList
       ]
     ]
