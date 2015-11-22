@@ -5,6 +5,7 @@ import qualified Queue.Lazy as L
 import qualified Queue.Mutable as M
 import qualified Queue.Log as Lg
 import qualified Queue.RealTime as R
+import qualified Queue.Bootstrapped as B
 import Queue.Util
 import Test.QuickCheck
 import Control.Monad
@@ -30,6 +31,7 @@ queueBenchmarks = do
             , bench "mutable" $ nf M.eval sample
             , bench "lg worst case" $ nf Lg.eval sample
             , bench "real time" $ nf R.eval sample
+            , bench "bootstrapped" $ nf B.eval sample
             ]
         ) [("short", randomQueueShort), ("long", randomQueueLong)]
     ]

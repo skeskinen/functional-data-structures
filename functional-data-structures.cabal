@@ -23,6 +23,7 @@ executable main
                        Queue.Mutable
                        Queue.Log
                        Queue.RealTime
+                       Queue.Bootstrapped
                        Sort.Benchmark
                        Sort.Sortable
                        Sort.Merge

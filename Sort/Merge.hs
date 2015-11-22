@@ -1,6 +1,8 @@
 module Sort.Merge where
 
 import Sort.Sortable
+import Test.QuickCheck
+import Control.Monad
 
 data Sort a = Sort
   { less :: Less a
@@ -28,3 +30,8 @@ instance Sortable Sort where
     in Sort less (size + 1) (addSeg [a] segs size)
 
   sort (Sort less _ segs) = foldl (merge less) [] segs
+
+instance (Ord a, Arbitrary a) => Arbitrary (Sort a) where
+  arbitrary =
+    sized $ \n ->
+      foldr add (new (<)) <$> replicateM n arbitrary
