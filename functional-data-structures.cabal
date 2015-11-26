@@ -27,10 +27,13 @@ executable main
                        Sort.Benchmark
                        Sort.Sortable
                        Sort.Merge
+                       Sort.Heap
+                       Sort.MergeHeap
                        Graph.Graph
                        Graph.PSQ
                        Graph.Benchmark
                        Graph.OkasakiRBT
+                       Other.StructuralAbstraction
   other-extensions:    FunctionalDependencies
   build-depends:       base >=4.8 && <4.9,
                        criterion,

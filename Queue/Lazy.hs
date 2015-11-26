@@ -4,6 +4,7 @@ import Queue.Util
 import Prelude hiding (tail, head)
 
 data Queue a = Queue [a] [a]
+  deriving Show
 
 queue [] r = Queue (reverse r) []
 queue f r = Queue f r
